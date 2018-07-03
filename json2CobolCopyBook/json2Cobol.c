@@ -1,11 +1,19 @@
+/*---------------------------------------------------------------------------------------------------------
+  json2CopyBook
+  -------------
+  The "parse" function in this program is the main function in this program.  It takes a string representing some well 
+  formed JSON, plus a series of null terminated strings which describe what is wanted out of that JSON  and returns the 
+  wanted contents as a byte array.
+
+  The byte array is just the flat contents of the JSON string and can be used as a COBOL copybook.
+
+  See json2Cobol.h for more details.
+	 
+*/
+
 #include <string.h>
 #include <stdio.h>
-#include <math.h>
 #include <stdlib.h>
-#include <limits.h>
-#include <ctype.h>
-
-#include "json2Cobol.h"
 
 #include "json2Cobol.h"
 
@@ -48,13 +56,12 @@ MYAPI int parse(const char * inputJson, const int count, const char * deiredStru
 	json_parser *parser = (json_parser *)malloc(SIZE_OF_JSON_PARSER);
 	parser->pos = 0;
 
-	int sss = sizeof( json_parser);
-	json_parser *p = malloc( sss);
+	json_parser *p = malloc(sizeof(json_parser) );
 
 	jsonWanted *wantedStructure;
 	
 	//allocates memory for an array of jsonWanted to hold the "desiredStructure" input.  This is freed below.
-	wantedStructure = (jsonWanted*) malloc(SIZE_OF_JSONWanted * (count+1));
+	wantedStructure = (jsonWanted*) malloc(SIZE_OF_JSONWanted * (count+1+250));
 
 	//allocates memory for the "parsed" json.  This will be realloc'ed if not big enough.  It is freed below.
 	parser->numberAllNodesAllocated = count * 2;

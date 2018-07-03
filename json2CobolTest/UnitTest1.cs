@@ -575,22 +575,23 @@ namespace json2CobolTest
 
             StringBuilder tstJson = new StringBuilder();
             tstJson.Append("{[");
-            string results = String.Format("{0:D3}", nI);
+            StringBuilder results = new StringBuilder();
+            results.Append( String.Format("{0:D3}", nI) );
 
             for (int i = 0; i < nI; i++)
             {
                 tstJson.Append( (i == 0 ? "" : ",") + "[");
-                results += String.Format("{0:D3}",nJ);
+                results.Append( String.Format("{0:D3}",nJ) );
                 for (int j = 0; j < nJ; j++)
                 {
 
                     tstJson.Append( (j == 0 ? "" : ",") + "[");
-                    results += String.Format("{0:D3}", nK);
+                    results.Append( String.Format("{0:D3}", nK) );
 
                     for (int k = 0; k < nK; k++)
                     {
                         tstJson.Append((k == 0 ? "" : ",") + k.ToString());
-                        results += String.Format("{0:D5}", k);
+                        results.Append( String.Format("{0:D5}", k) );
                     }
                     tstJson.Append("]");
                 }
@@ -617,9 +618,9 @@ namespace json2CobolTest
 
             int l = ((nK * 5 + 5) * nJ + 5) * nI + 5;
 
-            results = "" + results;
+            //results = "" + results;
 
-            Assert.IsTrue(compare(results, output, 0, results.Length));
+            Assert.IsTrue(compare(results.ToString(), output, 0, results.Length));
 
         }
 
