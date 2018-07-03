@@ -373,6 +373,7 @@ namespace json2CobolTest
             for (int i = 0; i < 100; i++) output[i] = 0x20;
             output[99] = 0x00;
 
+
             string tstJson = "{" +
                                 "\"a1\":1," +
                                 "\"x\":{" +
